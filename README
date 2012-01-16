@@ -1,0 +1,6 @@
+A very basic python UDP listener/log file appener.
+
+Features:
+  - configurable log file basename
+  - configurable port
+  - rolling log file appender by size
