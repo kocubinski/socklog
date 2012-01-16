@@ -42,7 +42,8 @@ def start_server():
             server_listen(s)
 
 def server_listen(s):
-    d, a = s.recvfrom(30720)
+    max_packet_size = 1024 * 1024;
+    d, a = s.recvfrom(max_packet_size)
     debug_write("Connected: " + str(a))
     write_msg(d)
 
