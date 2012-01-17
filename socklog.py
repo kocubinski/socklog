@@ -1,11 +1,11 @@
 import socket, os, datetime, argparse
 
-FILESIZE_LIMIT = 10 * 1024 * 1024
+#FILESIZE_LIMIT = 10 * 1024 * 1024
+FILESIZE_LIMIT = 1024
 DEBUG = False
 
 log_name = 'pharmaseq.log'
 port = 8877
-
 
 def debug_write(msg):
     if DEBUG: print msg
@@ -15,12 +15,11 @@ def archive_logfile():
     try_rename(datestr, 0)
 
 def try_rename(datestr, tries):
-    try:
-        suffix = '' if tries == 0 else '.' + str(tries)
-        new_name = log_name + '.' + datestr + suffix
-        print new_name
+    suffix = '' if tries == 0 else '.' + str(tries)
+    new_name = log_name + '.' + datestr + suffix
+    if not os.path.exists(new_name):
         os.rename(log_name, new_name)
-    except OSError:
+    else:
         tries += 1
         if tries < 50: try_rename(datestr, tries)
 
